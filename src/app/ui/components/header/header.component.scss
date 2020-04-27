@@ -1,0 +1,20 @@
+.header {
+  display: flex;
+  min-width: max-content;
+  height: 70px;
+  padding-left: 50px;
+  padding-right: 80px;
+  align-items: center;
+  justify-content: space-between;
+  background-color: black;
+  box-shadow: 0 0 8px 4px rgb(0, 0, 0, 0.6);
+  -webkit-user-select: none;
+  .app-logo {
+    font-size: 50px;
+    cursor: pointer;
+  }
+  .routerLink {
+    text-decoration: none;
+    color: #CFD8DC;
+  }
+}

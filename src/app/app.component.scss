@@ -1,0 +1,12 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .content {
+    margin: 0 auto 0 auto;
+    padding-right: 150px;
+    min-width: max-content;
+  }
+}
+
+

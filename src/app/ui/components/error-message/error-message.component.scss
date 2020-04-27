@@ -1,0 +1,16 @@
+.error-message {
+  width: 50vw;
+  min-width: fit-content;
+  padding: 20px;
+  margin: 30px auto 0 auto;
+  background-color: rgb(255, 0, 0, 0.2);
+  box-shadow: 0 0 7px 4px rgb(0, 0, 0, 0.5);
+  .error-message_head {
+    margin: auto;
+    font-size: 2em;
+    color: red;
+  }
+  .error-message_title {
+    margin: 20px 0 0 0;
+  }
+}

@@ -1,0 +1,20 @@
+<div class="add-client-form">
+  <p class="title">Add new company</p>
+  <form class="form" #addClientForm="ngForm" novalidate>
+    <div class="field">
+      <label>Company name</label>
+      <input name="name" [(ngModel)]="addingClient.name" required>
+    </div>
+    <div class="field">
+      <label>Company address</label>
+      <input name="address" [(ngModel)]="addingClient.address" required>
+    </div>
+    <div class="field">
+      <label>Company email</label>
+      <input name="email" [(ngModel)]="addingClient.email" required email>
+    </div>
+    <div class="action-buttons">
+      <button [disabled]="addClientForm.invalid" (click)="add(addingClient)">Add</button>
+    </div>
+  </form>
+</div>

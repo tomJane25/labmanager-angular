@@ -1,0 +1,27 @@
+<mat-progress-bar *ngIf="isLoading$ | async"  mode="indeterminate"></mat-progress-bar>
+<app-error-message *ngIf="error$ | async" [errorTitle]="error$ | async"></app-error-message>
+
+<ng-container *ngIf="clients$ | async">
+  <p class="table-title">Clients</p>
+  <div class="clients-actions">
+    <button
+      class="button-add-client"
+      (click)="isAddingClient = !isAddingClient"
+      [textContent]="isAddingClient ? 'Cancel': 'Add client'"></button>
+  </div>
+
+  <app-clients-add-form
+    *ngIf="isAddingClient"
+    (addClient)="addClient($event)"
+  ></app-clients-add-form>
+
+  <app-clients-table
+    [clients]="clients$ | async"
+    [isLoading]="isLoading$ | async"
+    [error]="error$ | async"
+    (deleteClient)="deleteClient($event)"
+    (updateClient)="updateClient($event)"
+  ></app-clients-table>
+</ng-container>
+
+
