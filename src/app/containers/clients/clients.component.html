@@ -4,24 +4,23 @@
 <ng-container *ngIf="clients$ | async">
   <p class="table-title">Clients</p>
   <div class="clients-actions">
-    <button
-      class="button-add-client"
-      (click)="isAddingClient = !isAddingClient"
-      [textContent]="isAddingClient ? 'Cancel': 'Add client'"></button>
+    <app-search-field
+      [placeholder]="'Find client by name...'"
+      [(searchString)]="searchString"
+    ></app-search-field>
+    <app-add-item-button
+      [title]="'Add client'"
+      (changeIsAdding)="changeIsAddingClient($event)"
+    ></app-add-item-button>
   </div>
 
-  <app-clients-add-form
-    *ngIf="isAddingClient"
+  <app-clients-add-form *ngIf="isAddingClient"
     (addClient)="addClient($event)"
   ></app-clients-add-form>
 
   <app-clients-table
-    [clients]="clients$ | async"
-    [isLoading]="isLoading$ | async"
-    [error]="error$ | async"
+    [clients]="clients$ | async | clientsFilter: searchString"
     (deleteClient)="deleteClient($event)"
     (updateClient)="updateClient($event)"
   ></app-clients-table>
 </ng-container>
-
-

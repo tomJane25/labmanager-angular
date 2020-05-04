@@ -1,4 +1,4 @@
-<table *ngIf="clients" class="clients-table">
+<table class="clients-table">
   <colgroup>
     <col class="col_1">
     <col class="col_2">
@@ -37,12 +37,17 @@
     </ng-container>
 
     <ng-container *ngIf="editingClient.id === client.id">
-      <td><input [(ngModel)]="editingClient.name" required value="{{editingClient.name}}"></td>
-      <td><input [(ngModel)]="editingClient.address" required value="{{editingClient.address}}"></td>
+      <td><input [(ngModel)]="editingClient.name" required value="{{editingClient.name}}" #name=ngModel></td>
+      <td><input [(ngModel)]="editingClient.address" required value="{{editingClient.address}}" #address=ngModel></td>
       <td><input [(ngModel)]="editingClient.email" required email value="{{editingClient.email}}" #email=ngModel></td>
       <td>
         <div class="action-buttons">
-          <button class="button save" [disabled]="email.invalid" (click)="update(editingClient)">Save</button>
+          <button
+            class="button save"
+            [disabled]="email.invalid || name.invalid || address.invalid"
+            (click)="update(editingClient)">
+            Save
+          </button>
           <button class="button cancel" (click)="cancel()">Cancel</button>
           <button class="button delete" (click)="delete(client.id)">
             <fa-icon [icon]="fontAwesome.faTimes"></fa-icon>

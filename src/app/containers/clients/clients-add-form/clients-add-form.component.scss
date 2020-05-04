@@ -1,4 +1,4 @@
-.add-client-form{
+.add-client-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -13,7 +13,7 @@
     margin: 0;
     text-align: center;
   }
-  .form{
+  .form {
     display: flex;
     flex-direction: column;
     .field {
@@ -22,6 +22,7 @@
       margin-top: 10px;
       label {
         width: 30%;
+        cursor: pointer;
       }
       input {
         width: 60%;

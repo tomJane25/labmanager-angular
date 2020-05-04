@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { faPencilAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 
-import { Client } from '../../../models';
-import { clearObject } from '../../../utils';
+import { Client } from '../../../ui/models';
+import { clearObject } from '../../../ui/utils';
 
 @Component({
   selector: 'app-clients-table',
@@ -16,8 +16,6 @@ export class ClientsTableComponent {
   };
 
   @Input() clients: Client[];
-  @Input() isLoading: boolean;
-  @Input() error;
 
   editingClient: Client = {
     id: null,
@@ -45,6 +43,4 @@ export class ClientsTableComponent {
   delete(clientId) {
     this.deleteClient.emit(clientId);
   }
-
-  constructor() { }
 }

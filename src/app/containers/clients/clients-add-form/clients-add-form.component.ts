@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
-import { Client } from '../../../models';
-import { clearObject } from '../../../utils';
+import { Client } from '../../../ui/models';
+import { clearObject } from '../../../ui/utils';
 
 @Component({
   selector: 'app-clients-add-form',

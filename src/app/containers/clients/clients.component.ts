@@ -3,11 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { Client } from '../../ui/models';
-import {
-  RootStoreState,
-  ClientActions,
-  ClientSelectors
-} from '../../store';
+import { RootStoreState, ClientActions, ClientSelectors } from '../../store';
 
 @Component({
   selector: 'app-clients',
@@ -19,6 +15,7 @@ export class ClientsComponent implements OnInit {
   isLoading$: Observable<boolean>;
   error$: Observable<any>;
   isAddingClient: boolean;
+  searchString: string;
 
   constructor(private store$: Store<RootStoreState.State>) {}
 
@@ -27,6 +24,10 @@ export class ClientsComponent implements OnInit {
     this.clients$ = this.store$.select(ClientSelectors.selectAllClients);
     this.isLoading$ = this.store$.select(ClientSelectors.selectClientsIsLoading);
     this.error$ = this.store$.select(ClientSelectors.selectClientsError);
+  }
+
+  changeIsAddingClient(isAdding){
+    this.isAddingClient = isAdding;
   }
 
   addClient(client){

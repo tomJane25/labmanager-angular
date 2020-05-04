@@ -18,8 +18,11 @@ import { ErrorMessageComponent } from './ui/components/error-message/error-messa
 import { HomeComponent } from './ui/components/home/home.component';
 import { ClientService } from './ui/services/client.service';
 import { ClientsComponent } from './containers/clients/clients.component';
-import { ClientsTableComponent } from './ui/components/clients/clients-table/clients-table.component';
-import { ClientsAddFormComponent } from './ui/components/clients/clients-add-form/clients-add-form.component';
+import { ClientsTableComponent } from './containers/clients/clients-table/clients-table.component';
+import { ClientsAddFormComponent } from './containers/clients/clients-add-form/clients-add-form.component';
+import { ClientsFilterPipe } from './ui/pipes';
+import { SearchFieldComponent } from './ui/components/search-field/search-field.component';
+import { AddItemButtonComponent } from './ui/components/add-item-button/add-item-button.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,9 @@ import { ClientsAddFormComponent } from './ui/components/clients/clients-add-for
     SidebarComponent,
     ClientsTableComponent,
     ClientsAddFormComponent,
+    ClientsFilterPipe,
+    SearchFieldComponent,
+    AddItemButtonComponent,
   ],
   imports: [
     BrowserModule,

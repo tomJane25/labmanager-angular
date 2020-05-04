@@ -1,0 +1,10 @@
+.search-field {
+  padding: 8px;
+  font-size: 1em;
+  border: 1px solid rgba(0,0,0,0.6);
+  border-radius: 8px;
+  outline: none;
+  &:focus {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(0, 0, 0, 0.4);
+  }
+}
