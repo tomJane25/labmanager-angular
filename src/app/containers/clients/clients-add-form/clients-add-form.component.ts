@@ -1,26 +1,25 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-
-import { Client } from '../../../ui/models';
-import { clearObject } from '../../../ui/utils';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-clients-add-form',
   templateUrl: './clients-add-form.component.html',
   styleUrls: ['./clients-add-form.component.scss']
 })
-export class ClientsAddFormComponent {
+export class ClientsAddFormComponent implements OnInit {
+  form: FormGroup;
+  @Output() submitEmitter = new EventEmitter();
 
-  addingClient: Client = {
-    id: null,
-    name: null,
-    address: null,
-    email: null
-  };
+  ngOnInit() {
+    this.form = new FormGroup({
+      name: new FormControl('', Validators.required),
+      address: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email])
+    });
+  }
 
-  @Output() addClient = new EventEmitter();
-
-  add(addingClient) {
-    this.addClient.emit({...addingClient});
-    clearObject(this.addingClient);
+  submit() {
+    this.submitEmitter.emit({...this.form.value});
+    this.form.reset();
   }
 }

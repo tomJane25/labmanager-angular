@@ -14,18 +14,15 @@ export class ClientsTableComponent {
     faPencilAlt,
     faTimes,
   };
-
-  @Input() clients: Client[];
-
   editingClient: Client = {
     id: null,
     name: null,
     address: null,
     email: null
   };
-
-  @Output() updateClient = new EventEmitter();
-  @Output() deleteClient = new EventEmitter();
+  @Input() clients: Client[];
+  @Output() updateEmitter = new EventEmitter();
+  @Output() deleteEmitter = new EventEmitter();
 
   edit(client) {
     this.editingClient = {...client};
@@ -36,11 +33,11 @@ export class ClientsTableComponent {
   }
 
   update(editingClient) {
-    this.updateClient.emit({...editingClient});
+    this.updateEmitter.emit({...editingClient});
     clearObject(this.editingClient);
   }
 
   delete(clientId) {
-    this.deleteClient.emit(clientId);
+    this.deleteEmitter.emit(clientId);
   }
 }

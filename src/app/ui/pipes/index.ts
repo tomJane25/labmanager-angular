@@ -1,1 +1,1 @@
-export * from './clientsFilter';
+export * from './clients-filter';

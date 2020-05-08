@@ -22,4 +22,11 @@ describe('SearchFieldComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should emit search string on change', () => {
+    let stringFromComponent: string;
+    component.searchStringChange.subscribe(value => stringFromComponent = value);
+    component.onSearchStringChange('test string');
+    expect(stringFromComponent).toBe('test string');
+  });
 });

@@ -8,19 +8,20 @@
       [placeholder]="'Find client by name...'"
       [(searchString)]="searchString"
     ></app-search-field>
-    <app-add-item-button
-      [title]="'Add client'"
-      (changeIsAdding)="changeIsAddingClient($event)"
-    ></app-add-item-button>
+    <app-active-button
+      [titleInactive]="'Add client'"
+      [titleActive]="'Cancel'"
+      (isActiveEmitter)="changeIsAddingClient($event)"
+    ></app-active-button>
   </div>
 
   <app-clients-add-form *ngIf="isAddingClient"
-    (addClient)="addClient($event)"
+    (submitEmitter)="addClient($event)"
   ></app-clients-add-form>
 
   <app-clients-table
     [clients]="clients$ | async | clientsFilter: searchString"
-    (deleteClient)="deleteClient($event)"
-    (updateClient)="updateClient($event)"
+    (deleteEmitter)="deleteClient($event)"
+    (updateEmitter)="updateClient($event)"
   ></app-clients-table>
 </ng-container>

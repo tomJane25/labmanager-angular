@@ -32,7 +32,6 @@ export class ClientsComponent implements OnInit {
 
   addClient(client){
     this.store$.dispatch(new ClientActions.AddClientAction({item: client}));
-    this.isAddingClient = !this.isAddingClient;
   }
 
   updateClient(client){

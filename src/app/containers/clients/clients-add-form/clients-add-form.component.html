@@ -1,20 +1,37 @@
 <div class="add-client-form">
   <p class="title">Add new company</p>
-  <form class="form" #addClientForm="ngForm" novalidate>
+  <form class="form" [formGroup]="form" (ngSubmit)="submit()">
     <div class="field">
       <label for="name">Company name</label>
-      <input id="name" name="name" [(ngModel)]="addingClient.name" required>
+      <input id="name" type="text" formControlName="name">
     </div>
+    <div class="validate" *ngIf="form.get('name').invalid && form.get('name').touched">
+      <small>Name cannot be empty</small>
+    </div>
+
     <div class="field">
       <label for="address">Company address</label>
-      <input id="address" name="address" [(ngModel)]="addingClient.address" required>
+      <input id="address" type="text" formControlName="address">
     </div>
+    <div class="validate" *ngIf="form.get('address').invalid && form.get('address').touched">
+      <small>Address cannot be empty</small>
+    </div>
+
     <div class="field">
       <label for="email">Company email</label>
-      <input id="email" name="email" [(ngModel)]="addingClient.email" required email>
+      <input id="email" type="email" formControlName="email">
     </div>
+    <div class="validate" *ngIf="form.get('email').invalid && form.get('email').touched">
+      <small *ngIf="form.get('email').errors.required">
+        Email cannot be empty
+      </small>
+      <small *ngIf="form.get('email').errors.email">
+        Enter valid email
+      </small>
+    </div>
+
     <div class="action-buttons">
-      <button [disabled]="addClientForm.invalid" (click)="add(addingClient)">Add</button>
+      <button type="submit" [disabled]="form.invalid">Add</button>
     </div>
   </form>
 </div>

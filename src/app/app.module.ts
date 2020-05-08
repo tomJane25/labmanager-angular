@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -22,7 +23,7 @@ import { ClientsTableComponent } from './containers/clients/clients-table/client
 import { ClientsAddFormComponent } from './containers/clients/clients-add-form/clients-add-form.component';
 import { ClientsFilterPipe } from './ui/pipes';
 import { SearchFieldComponent } from './ui/components/search-field/search-field.component';
-import { AddItemButtonComponent } from './ui/components/add-item-button/add-item-button.component';
+import { ActiveButtonComponent } from './ui/components/active-button/active-button.component';
 
 @NgModule({
   declarations: [
@@ -36,12 +37,13 @@ import { AddItemButtonComponent } from './ui/components/add-item-button/add-item
     ClientsAddFormComponent,
     ClientsFilterPipe,
     SearchFieldComponent,
-    AddItemButtonComponent,
+    ActiveButtonComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     FontAwesomeModule,
     MatProgressBarModule,
     BrowserAnimationsModule,
