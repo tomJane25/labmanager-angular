@@ -5,15 +5,16 @@ import { ok } from 'assert';
 import { ClientService } from './client.service';
 import { Client } from '../models';
 
+const testClient: Client = {
+  id: 1,
+  name: 'test',
+  address: 'test',
+  email: 'test@mail.com'
+};
+
 describe('ClientService', () => {
   let service: ClientService;
   let httpTestingController: HttpTestingController;
-  const testClient: Client = {
-    id: 1,
-    name: 'test',
-    address: 'test',
-    email: 'test@mail.com'
-  };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -24,7 +25,7 @@ describe('ClientService', () => {
     httpTestingController = TestBed.inject(HttpTestingController);
   });
 
-  it('should be created', () => {
+  it('should create', () => {
     expect(service).toBeTruthy();
   });
 

@@ -24,7 +24,7 @@ describe('ActiveButtonComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should emit property on click', () => {
+  it('should emit property on click event', () => {
     let property = false;
     component.isActiveEmitter.subscribe(value => property = value);
     component.changeIsActive();

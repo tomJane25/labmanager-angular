@@ -6,7 +6,7 @@ import { ClientsComponent } from './containers/clients/clients.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     pathMatch: 'full',
     component: HomeComponent
   },

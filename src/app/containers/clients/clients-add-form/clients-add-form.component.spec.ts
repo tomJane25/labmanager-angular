@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { ClientsAddFormComponent } from './clients-add-form.component';
 
@@ -8,7 +9,8 @@ describe('ClientsAddFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ClientsAddFormComponent ]
+      declarations: [ ClientsAddFormComponent ],
+      imports: [ ReactiveFormsModule ]
     })
     .compileComponents();
   }));
