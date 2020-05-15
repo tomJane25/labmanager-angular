@@ -27,5 +27,4 @@ export class ClientService {
   deleteClient(clientId: number): Observable<any> {
     return this.http.delete<any>(`https://my-json-server.typicode.com/tomJane25/labmanager_JSON/clients/${clientId}`);
   }
-
 }

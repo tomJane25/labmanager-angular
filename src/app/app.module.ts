@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -24,6 +24,11 @@ import { ClientsAddFormComponent } from './containers/clients/clients-add-form/c
 import { ClientsFilterPipe } from './ui/pipes';
 import { SearchFieldComponent } from './ui/components/search-field/search-field.component';
 import { ActiveButtonComponent } from './ui/components/active-button/active-button.component';
+import { ContractsComponent } from './containers/contracts/contracts.component';
+import { ContractsTableComponent } from './containers/contracts/contracts-table/contracts-table.component';
+import { ContractsAddFormComponent } from './containers/contracts/contracts-add-form/contracts-add-form.component';
+import { ContractsSearchFormComponent } from './containers/contracts/contracts-search-form/contracts-search-form.component';
+import { ContractsFilterPipe } from './ui/pipes';
 
 @NgModule({
   declarations: [
@@ -38,6 +43,11 @@ import { ActiveButtonComponent } from './ui/components/active-button/active-butt
     ClientsFilterPipe,
     SearchFieldComponent,
     ActiveButtonComponent,
+    ContractsComponent,
+    ContractsTableComponent,
+    ContractsAddFormComponent,
+    ContractsSearchFormComponent,
+    ContractsFilterPipe,
   ],
   imports: [
     BrowserModule,
@@ -57,26 +67,3 @@ import { ActiveButtonComponent } from './ui/components/active-button/active-butt
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

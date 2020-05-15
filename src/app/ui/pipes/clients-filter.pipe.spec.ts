@@ -1,4 +1,4 @@
-import { ClientsFilterPipe } from './clients-filter';
+import { ClientsFilterPipe } from './clients-filter.pipe';
 import { Client } from '../models';
 
 const testClients: Client[] = [

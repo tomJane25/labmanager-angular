@@ -1,0 +1,14 @@
+.form-search {
+  display: flex;
+  justify-content: space-between;
+  .field {
+    margin-right: 30px;
+    label {
+      margin-right: 10px;
+      font-size: 25px;
+    }
+    .control {
+      font-size: 20px;
+    }
+  }
+}

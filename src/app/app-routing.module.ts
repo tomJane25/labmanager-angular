@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './ui/components/home/home.component';
 import { ClientsComponent } from './containers/clients/clients.component';
+import {ContractsComponent} from './containers/contracts/contracts.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,11 @@ const routes: Routes = [
     path: 'clients',
     pathMatch: 'full',
     component: ClientsComponent
+  },
+  {
+    path: 'contracts',
+    pathMatch: 'full',
+    component: ContractsComponent
   },
   {
     path: '**',

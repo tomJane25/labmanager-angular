@@ -1,0 +1,22 @@
+<form class="form-search" [formGroup]="form" (change)="onChange()">
+
+  <div class="field">
+    <label for="client">Client</label>
+    <select id="client" class="control" formControlName="clientId">
+      <option value="{{null}}">All</option>
+      <ng-container *ngFor="let client of clients">
+        <option value="{{client.id}}">{{client.name}}</option>
+      </ng-container>
+    </select>
+  </div>
+
+  <div class="field">
+    <label for="status">Status</label>
+    <select id="status" class="control" formControlName="status">
+      <option value="{{null}}">All</option>
+      <option>OPEN</option>
+      <option>CLOSED</option>
+      <option>CANCELED</option>
+    </select>
+  </div>
+</form>

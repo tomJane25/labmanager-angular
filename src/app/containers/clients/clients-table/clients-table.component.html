@@ -1,4 +1,4 @@
-<table class="clients-table">
+<table class="table-items">
   <colgroup>
     <col class="col_1">
     <col class="col_2">
@@ -19,16 +19,14 @@
     <ng-container *ngIf="editingClient.id !== client.id">
       <td>{{client.name}}</td>
       <td>{{client.address}}</td>
-      <td>
-        <a href="mailto:{{client.email}}">{{client.email}}</a>
-      </td>
+      <td><a href="mailto:{{client.email}}">{{client.email}}</a></td>
       <td>
         <div class="action-buttons">
-          <button class="button edit" (click)="edit(client)">
+          <button class="btn-table btn-table-attention" (click)="edit(client)">
             <fa-icon [icon]="fontAwesome.faPencilAlt"></fa-icon>
             <span> Edit</span>
           </button>
-          <button class="button delete" (click)="delete(client.id)">
+          <button class="btn-table btn-table-danger" (click)="delete(client.id)">
             <fa-icon [icon]="fontAwesome.faTimes"></fa-icon>
             <span> Delete</span>
           </button>
@@ -43,16 +41,12 @@
       <td>
         <div class="action-buttons">
           <button
-            class="button save"
+            class="btn-table btn-table-confirm"
             [disabled]="email.invalid || name.invalid || address.invalid"
             (click)="update(editingClient)">
             Save
           </button>
-          <button class="button cancel" (click)="cancel()">Cancel</button>
-          <button class="button delete" (click)="delete(client.id)">
-            <fa-icon [icon]="fontAwesome.faTimes"></fa-icon>
-            <span> Delete</span>
-          </button>
+          <button class="btn-table btn-table-attention" (click)="cancel()">Cancel</button>
         </div>
       </td>
     </ng-container>

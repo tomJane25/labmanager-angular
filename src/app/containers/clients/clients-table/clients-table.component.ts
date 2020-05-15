@@ -14,12 +14,7 @@ export class ClientsTableComponent {
     faPencilAlt,
     faTimes,
   };
-  editingClient: Client = {
-    id: null,
-    name: null,
-    address: null,
-    email: null
-  };
+  editingClient: Client = new Client();
   @Input() clients: Client[];
   @Output() updateEmitter = new EventEmitter();
   @Output() deleteEmitter = new EventEmitter();
