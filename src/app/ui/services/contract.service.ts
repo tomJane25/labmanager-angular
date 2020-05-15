@@ -1,30 +1,29 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Contract } from '../models';
+import { HttpService } from './http.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ContractService {
+export class ContractService extends HttpService {
 
-  constructor(private http: HttpClient) {
-  }
+  private readonly CONTRACT_URL = 'https://my-json-server.typicode.com/tomJane25/labmanager_JSON/contracts';
 
   getContracts(): Observable<Contract[]> {
-    return this.http.get<Contract[]>('https://my-json-server.typicode.com/tomJane25/labmanager_JSON/contracts');
+    return this.get<Contract>(this.CONTRACT_URL);
   }
 
   addContract(contract: Contract): Observable<Contract> {
-    return this.http.post<Contract>('https://my-json-server.typicode.com/tomJane25/labmanager_JSON/contracts', contract);
+    return this.post<Contract>(this.CONTRACT_URL, contract);
   }
 
   updateContract(contract: Contract): Observable<Contract> {
-    return this.http.put<Contract>(`https://my-json-server.typicode.com/tomJane25/labmanager_JSON/contracts/${contract.id}`, contract);
+    return this.put<Contract>(this.CONTRACT_URL + `/${contract.id}`, contract);
   }
 
   deleteContract(contractId: number): Observable<any> {
-    return this.http.delete<any>(`https://my-json-server.typicode.com/tomJane25/labmanager_JSON/contracts/${contractId}`);
+    return this.delete<any>(this.CONTRACT_URL + `/${contractId}`);
   }
 }

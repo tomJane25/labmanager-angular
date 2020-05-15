@@ -1,30 +1,29 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Client } from '../models';
+import { HttpService } from './http.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ClientService {
+export class ClientService extends HttpService {
 
-  constructor(private http: HttpClient ) {
-  }
+  private readonly CLIENT_URL = 'https://my-json-server.typicode.com/tomJane25/labmanager_JSON/clients';
 
   getClients(): Observable<Client[]> {
-    return this.http.get<Client[]>('https://my-json-server.typicode.com/tomJane25/labmanager_JSON/clients');
+    return this.get<Client>(this.CLIENT_URL);
   }
 
   addClient(client: Client): Observable<Client> {
-    return this.http.post<Client>('https://my-json-server.typicode.com/tomJane25/labmanager_JSON/clients', client);
+    return this.post<Client>(this.CLIENT_URL, client);
   }
 
   updateClient(client: Client): Observable<Client> {
-    return this.http.put<Client>(`https://my-json-server.typicode.com/tomJane25/labmanager_JSON/clients/${client.id}`, client);
+    return this.put<Client>(this.CLIENT_URL + `/${client.id}`, client);
   }
 
   deleteClient(clientId: number): Observable<any> {
-    return this.http.delete<any>(`https://my-json-server.typicode.com/tomJane25/labmanager_JSON/clients/${clientId}`);
+    return this.delete<any>(this.CLIENT_URL + `/${clientId}`);
   }
 }

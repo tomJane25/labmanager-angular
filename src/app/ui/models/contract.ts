@@ -1,7 +1,8 @@
+import { Entity } from './entity';
+
 export type ContractStatusType = 'OPEN' | 'CLOSED' | 'CANCELED';
 
-export class Contract {
-  id?: number;
+export class Contract extends Entity {
   number: string;
   clientId: number;
   title: string;

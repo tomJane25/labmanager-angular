@@ -17,7 +17,6 @@ import { HeaderComponent } from './ui/components/header/header.component';
 import { SidebarComponent } from './ui/components/sidebar/sidebar.component';
 import { ErrorMessageComponent } from './ui/components/error-message/error-message.component';
 import { HomeComponent } from './ui/components/home/home.component';
-import { ClientService } from './ui/services/client.service';
 import { ClientsComponent } from './containers/clients/clients.component';
 import { ClientsTableComponent } from './containers/clients/clients-table/clients-table.component';
 import { ClientsAddFormComponent } from './containers/clients/clients-add-form/clients-add-form.component';
@@ -63,7 +62,6 @@ import { ContractsFilterPipe } from './ui/pipes';
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument(),
   ],
-  providers: [ClientService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
