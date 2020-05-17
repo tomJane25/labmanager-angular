@@ -2,13 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Entity } from '../models';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export abstract class HttpService {
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    protected notificationService: NotificationService
+  ) {}
 
   get<T extends Entity>(url: string): Observable<T[]> {
     return this.http.get<T[]>(url);

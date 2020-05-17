@@ -1,0 +1,17 @@
+<div
+  class="notification-wrap"
+  *ngIf="notifications.length"
+  >
+  <ng-container *ngFor="let notification of notifications">
+    <div
+      class="notification"
+      [ngClass]="{
+      'notification-success': notification.type === 'success',
+      'notification-warning': notification.type === 'warning',
+      'notification-error': notification.type === 'error'
+    }"
+    >
+      <p>{{notification.text}}</p>
+    </div>
+  </ng-container>
+</div>

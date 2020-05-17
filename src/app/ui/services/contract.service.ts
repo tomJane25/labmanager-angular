@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { Contract } from '../models';
 import { HttpService } from './http.service';
@@ -16,14 +17,20 @@ export class ContractService extends HttpService {
   }
 
   addContract(contract: Contract): Observable<Contract> {
-    return this.post<Contract>(this.CONTRACT_URL, contract);
+    return this.post<Contract>(this.CONTRACT_URL, contract).pipe(
+      tap(() => this.notificationService.success(`Added contract ${contract.number}`))
+    );
   }
 
   updateContract(contract: Contract): Observable<Contract> {
-    return this.put<Contract>(this.CONTRACT_URL + `/${contract.id}`, contract);
+    return this.put<Contract>(this.CONTRACT_URL + `/${contract.id}`, contract).pipe(
+      tap(() => this.notificationService.success(`Updated contract ${contract.number}`))
+    );
   }
 
   deleteContract(contractId: number): Observable<any> {
-    return this.delete<any>(this.CONTRACT_URL + `/${contractId}`);
+    return this.delete<any>(this.CONTRACT_URL + `/${contractId}`).pipe(
+      tap(() => this.notificationService.success(`Deleted contract`))
+    );
   }
 }

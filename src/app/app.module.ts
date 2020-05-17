@@ -28,6 +28,7 @@ import { ContractsTableComponent } from './containers/contracts/contracts-table/
 import { ContractsAddFormComponent } from './containers/contracts/contracts-add-form/contracts-add-form.component';
 import { ContractsSearchFormComponent } from './containers/contracts/contracts-search-form/contracts-search-form.component';
 import { ContractsFilterPipe } from './ui/pipes';
+import { NotificationComponent } from './ui/components/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { ContractsFilterPipe } from './ui/pipes';
     ContractsAddFormComponent,
     ContractsSearchFormComponent,
     ContractsFilterPipe,
+    NotificationComponent,
   ],
   imports: [
     BrowserModule,

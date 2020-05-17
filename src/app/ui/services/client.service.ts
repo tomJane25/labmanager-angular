@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { Client } from '../models';
 import { HttpService } from './http.service';
@@ -16,14 +17,20 @@ export class ClientService extends HttpService {
   }
 
   addClient(client: Client): Observable<Client> {
-    return this.post<Client>(this.CLIENT_URL, client);
+    return this.post<Client>(this.CLIENT_URL, client).pipe(
+      tap(() => this.notificationService.success(`Added client ${client.name}`))
+    );
   }
 
   updateClient(client: Client): Observable<Client> {
-    return this.put<Client>(this.CLIENT_URL + `/${client.id}`, client);
+    return this.put<Client>(this.CLIENT_URL + `/${client.id}`, client).pipe(
+      tap(() => this.notificationService.success(`Updated client ${client.name}`))
+    );
   }
 
   deleteClient(clientId: number): Observable<any> {
-    return this.delete<any>(this.CLIENT_URL + `/${clientId}`);
+    return this.delete<any>(this.CLIENT_URL + `/${clientId}`).pipe(
+      tap(() => this.notificationService.success(`Deleted client`)),
+    );
   }
 }
