@@ -12,8 +12,6 @@ import { RootStoreState, ClientActions, ClientSelectors } from '../../store';
 })
 export class ClientsComponent implements OnInit {
   clients$: Observable<Client[]>;
-  isLoading$: Observable<boolean>;
-  error$: Observable<any>;
   isAddingClient: boolean;
   searchString: string;
 
@@ -22,8 +20,6 @@ export class ClientsComponent implements OnInit {
   ngOnInit() {
     this.store$.dispatch(new ClientActions.LoadClientsAction());
     this.clients$ = this.store$.select(ClientSelectors.selectAllClients);
-    this.isLoading$ = this.store$.select(ClientSelectors.selectClientsIsLoading);
-    this.error$ = this.store$.select(ClientSelectors.selectClientsError);
   }
 
   changeIsAddingClient(isAdding){
@@ -38,7 +34,7 @@ export class ClientsComponent implements OnInit {
     this.store$.dispatch(new ClientActions.UpdateClientAction({item: client}));
   }
 
-  deleteClient(clientId){
-    this.store$.dispatch(new ClientActions.DeleteClientAction({itemId: clientId}));
+  deleteClient(client){
+    this.store$.dispatch(new ClientActions.DeleteClientAction({item: client}));
   }
 }

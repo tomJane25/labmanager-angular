@@ -9,11 +9,6 @@ export const selectAllClients = createSelector(
   state => state.clients
 );
 
-export const selectClientsIsLoading = createSelector(
-  selectClientsState,
-  state => state.isLoading
-);
-
 export const selectClientsError = createSelector(
   selectClientsState,
   state => state.error

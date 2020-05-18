@@ -32,7 +32,7 @@ export class ClientsTableComponent {
     clearObject(this.editingClient);
   }
 
-  delete(clientId) {
-    this.deleteEmitter.emit(clientId);
+  delete(client) {
+    this.deleteEmitter.emit(client);
   }
 }

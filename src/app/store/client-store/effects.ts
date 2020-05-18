@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType, } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import {catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 
 import { ClientService } from '../../ui/services/client.service';
 import * as clientActions from './actions';
@@ -11,7 +11,7 @@ import * as clientActions from './actions';
 export class ClientEffects {
   constructor(
     private clientService: ClientService,
-    private actions$: Actions
+    private actions$: Actions,
   ) {}
 
   @Effect()
@@ -59,14 +59,13 @@ export class ClientEffects {
   @Effect()
   deleteClient$: Observable<Action> = this.actions$.pipe(
     ofType<clientActions.DeleteClientAction>(clientActions.ActionTypes.DELETE_CLIENT),
-    switchMap(action => this.clientService.deleteClient(action.payload.itemId).pipe(
+    switchMap(action => this.clientService.deleteClient(action.payload.item).pipe(
       map(
         item =>
-          new clientActions.DeleteClientSuccessAction({itemId: action.payload.itemId})
+          new clientActions.DeleteClientSuccessAction({item: action.payload.item})
       ),
       catchError(error =>
-        of(new clientActions.FailureClientHttpResponseAction({error: error.message}))
-        )
+        of(new clientActions.FailureClientHttpResponseAction({error: error.message})))
       )
     )
   );

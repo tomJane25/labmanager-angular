@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Entity } from '../models';
 import { NotificationService } from './notification.service';
+import { SpinnerService } from './spinner.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ export abstract class HttpService {
 
   constructor(
     private http: HttpClient,
-    protected notificationService: NotificationService
+    protected notificationService: NotificationService,
+    protected spinnerService: SpinnerService
   ) {}
 
   get<T extends Entity>(url: string): Observable<T[]> {

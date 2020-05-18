@@ -12,8 +12,6 @@ import { Client, Contract, ContractsSearchParams } from '../../ui/models';
 export class ContractsComponent implements OnInit {
   contracts$: Observable<Contract[]>;
   clients$: Observable<Client[]>;
-  isLoading$: Observable<boolean>;
-  error$: Observable<any>;
   isAddingContract: boolean;
   searchParams: ContractsSearchParams;
 
@@ -24,8 +22,6 @@ export class ContractsComponent implements OnInit {
     this.store$.dispatch(new ClientActions.LoadClientsAction());
     this.contracts$ = this.store$.select(ContractSelectors.selectAllContracts);
     this.clients$ = this.store$.select(ClientSelectors.selectAllClients);
-    this.isLoading$ = this.store$.select(ContractSelectors.selectContractsIsLoading);
-    this.error$ = this.store$.select(ContractSelectors.selectContractsError);
   }
 
   changeIsAddingContract(isAdding){
@@ -40,8 +36,8 @@ export class ContractsComponent implements OnInit {
     this.store$.dispatch(new ContractActions.UpdateContractAction({item: contract}));
   }
 
-  deleteContract(contractId){
-    this.store$.dispatch(new ContractActions.DeleteContractAction({itemId: contractId}));
+  deleteContract(contract){
+    this.store$.dispatch(new ContractActions.DeleteContractAction({item: contract}));
   }
 
   filterContracts(searchParams){

@@ -44,12 +44,12 @@ export class UpdateContractSuccessAction implements Action {
 
 export class DeleteContractAction implements Action {
   public readonly type = ActionTypes.DELETE_CONTRACT;
-  constructor(public payload: {itemId: number}) {}
+  constructor(public payload: {item: Contract}) {}
 }
 
 export class DeleteContractSuccessAction implements Action {
   public readonly type = ActionTypes.DELETE_CONTRACT_SUCCESS;
-  constructor(public payload: {itemId: number}) {}
+  constructor(public payload: {item: Contract}) {}
 }
 
 export class FailureContractHttpResponseAction implements Action {

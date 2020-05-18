@@ -6,7 +6,6 @@ import {catchError, map, switchMap } from 'rxjs/operators';
 
 import { ContractService } from '../../ui/services/contract.service';
 import * as contractActions from './actions';
-import * as clientActions from '../client-store/actions';
 
 @Injectable()
 export class ContractEffects {
@@ -60,10 +59,10 @@ export class ContractEffects {
   @Effect()
   deleteContract$: Observable<Action> = this.actions$.pipe(
     ofType<contractActions.DeleteContractAction>(contractActions.ActionTypes.DELETE_CONTRACT),
-    switchMap(action => this.contractService.deleteContract(action.payload.itemId).pipe(
+    switchMap(action => this.contractService.deleteContract(action.payload.item).pipe(
       map(
         item =>
-          new contractActions.DeleteContractSuccessAction({itemId: action.payload.itemId})
+          new contractActions.DeleteContractSuccessAction({item: action.payload.item})
       ),
       catchError(error =>
         of(new contractActions.FailureContractHttpResponseAction({error: error.message}))

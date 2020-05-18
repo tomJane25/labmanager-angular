@@ -44,7 +44,7 @@ export class ContractsTableComponent {
     clearObject(this.editingContract);
   }
 
-  delete(contractId) {
-    this.deleteEmitter.emit(contractId);
+  delete(contract) {
+    this.deleteEmitter.emit(contract);
   }
 }
