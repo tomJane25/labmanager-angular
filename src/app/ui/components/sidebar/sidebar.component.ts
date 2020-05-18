@@ -1,5 +1,6 @@
 import { Component} from '@angular/core';
 import { faUsers, faHandshake } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,4 +12,6 @@ export class SidebarComponent {
     faUsers,
     faHandshake
   };
+
+  constructor(public auth: AuthService) {}
 }

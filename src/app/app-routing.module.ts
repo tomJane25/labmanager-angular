@@ -3,23 +3,33 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './ui/components/home/home.component';
 import { ClientsComponent } from './containers/clients/clients.component';
-import {ContractsComponent} from './containers/contracts/contracts.component';
+import { ContractsComponent } from './containers/contracts/contracts.component';
+import { LoginComponent } from './ui/components/login/login.component';
+import { AuthGuard } from './ui/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: 'home',
     pathMatch: 'full',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'login',
+    pathMatch: 'full',
+    component: LoginComponent
   },
   {
     path: 'clients',
     pathMatch: 'full',
-    component: ClientsComponent
+    component: ClientsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'contracts',
     pathMatch: 'full',
-    component: ContractsComponent
+    component: ContractsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '**',

@@ -70,7 +70,7 @@ describe('ClientService', () => {
   });
 
   it('should delete client', () => {
-    service.deleteClient(testClient.id).subscribe(response => ok(true));
+    service.deleteClient(testClient).subscribe(response => ok(true));
     const request = httpTestingController.expectOne(
       `https://my-json-server.typicode.com/tomJane25/labmanager_JSON/clients/${testClient.id}`);
     expect(request.request.method).toEqual('DELETE');
