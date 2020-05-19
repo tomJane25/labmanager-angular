@@ -20,7 +20,7 @@ export class ContractsTableComponent {
   @Output() deleteEmitter = new EventEmitter();
 
 
-  getClientNameById(clientId: number): string {
+  getClientNameById(clientId: string): string {
     if (this.clients) {
       const client = this.clients.find(item => item.id === clientId);
       if (client) {

@@ -24,7 +24,7 @@ export class ContractsComponent implements OnInit {
     this.clients$ = this.store$.select(ClientSelectors.selectAllClients);
   }
 
-  changeIsAddingContract(isAdding){
+  setIsAddingContract(isAdding){
     this.isAddingContract = isAdding;
   }
 

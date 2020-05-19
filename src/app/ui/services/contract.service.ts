@@ -1,20 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 
 import { Contract } from '../models';
 import { HttpService } from './http.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContractService extends HttpService {
 
-  private readonly CONTRACT_URL = 'https://my-json-server.typicode.com/tomJane25/labmanager_JSON/contracts';
+  private readonly CONTRACT_URL = environment.dbUrl + '/contracts';
 
   getContracts(): Observable<Contract[]> {
     this.spinnerService.setIsLoading(true);
-    return this.get<Contract>(this.CONTRACT_URL).pipe(
+    return this.get<Contract>(this.CONTRACT_URL + '.json').pipe(
+      map(response => {
+        return Object.keys(response).map(key => ({
+          ...response[key],
+          id: key,
+        }));
+      }),
       tap(() => {
         this.spinnerService.setIsLoading(false);
       }),
@@ -28,7 +35,13 @@ export class ContractService extends HttpService {
 
   addContract(contract: Contract): Observable<Contract> {
     this.spinnerService.setIsLoading(true);
-    return this.post<Contract>(this.CONTRACT_URL, contract).pipe(
+    return this.post<any>(this.CONTRACT_URL  + '.json', contract).pipe(
+      map(response => {
+        return {
+          ...contract,
+          id: response.name
+        };
+      }),
       tap(() => {
         this.spinnerService.setIsLoading(false);
         this.notificationService.success(`Added contract ${contract.number}`);
@@ -43,7 +56,7 @@ export class ContractService extends HttpService {
 
   updateContract(contract: Contract): Observable<Contract> {
     this.spinnerService.setIsLoading(true);
-    return this.put<Contract>(this.CONTRACT_URL + `/${contract.id}`, contract).pipe(
+    return this.put<Contract>(this.CONTRACT_URL + `/${contract.id}.json`, contract).pipe(
       tap(() => {
         this.spinnerService.setIsLoading(false);
         this.notificationService.success(`Updated contract ${contract.number}`);
@@ -58,7 +71,7 @@ export class ContractService extends HttpService {
 
   deleteContract(contract: Contract): Observable<any> {
     this.spinnerService.setIsLoading(true);
-    return this.delete<any>(this.CONTRACT_URL + `/${contract.id}`).pipe(
+    return this.delete<any>(this.CONTRACT_URL + `/${contract.id}.json`).pipe(
       tap(() => {
         this.spinnerService.setIsLoading(false);
         this.notificationService.warning(`Deleted contract ${contract.number}`);

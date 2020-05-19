@@ -27,7 +27,7 @@ export class ContractsAddFormComponent implements OnInit {
     const newContract: Contract = {
       ...this.form.value,
       balance: this.form.value.amount,
-      clientId: +this.form.value.clientId,
+      clientId: this.form.value.clientId,
       status: 'OPEN'
     };
     this.submitEmitter.emit(newContract);

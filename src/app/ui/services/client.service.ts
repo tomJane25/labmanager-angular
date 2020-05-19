@@ -1,20 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 
 import { Client } from '../models';
 import { HttpService } from './http.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientService extends HttpService {
 
-  private readonly CLIENT_URL = 'https://my-json-server.typicode.com/tomJane25/labmanager_JSON/clients';
+  private readonly CLIENT_URL = environment.dbUrl + '/clients';
 
   getClients(): Observable<Client[]> {
     this.spinnerService.setIsLoading(true);
-    return this.get<Client>(this.CLIENT_URL).pipe(
+    return this.get<Client>(this.CLIENT_URL + '.json').pipe(
+      map(response => {
+        return Object.keys(response).map(key => ({
+          ...response[key],
+          id: key,
+        }));
+      }),
       tap(() => this.spinnerService.setIsLoading(false)),
       catchError (error => {
         this.spinnerService.setIsLoading(false);
@@ -26,7 +33,13 @@ export class ClientService extends HttpService {
 
   addClient(client: Client): Observable<Client> {
     this.spinnerService.setIsLoading(true);
-    return this.post<Client>(this.CLIENT_URL, client).pipe(
+    return this.post<Client>(this.CLIENT_URL + '.json', client).pipe(
+      map(response => {
+        return {
+          ...client,
+          id: response.name
+        };
+      }),
       tap(() => {
         this.spinnerService.setIsLoading(false);
         this.notificationService.success(`Added client ${client.name}`);
@@ -41,7 +54,7 @@ export class ClientService extends HttpService {
 
   updateClient(client: Client): Observable<Client> {
     this.spinnerService.setIsLoading(true);
-    return this.put<Client>(this.CLIENT_URL + `/${client.id}`, client).pipe(
+    return this.put<Client>(this.CLIENT_URL + `/${client.id}.json`, client).pipe(
       tap(() => {
         this.spinnerService.setIsLoading(false);
         this.notificationService.success(`Updated client ${client.name}`);
@@ -56,7 +69,7 @@ export class ClientService extends HttpService {
 
   deleteClient(client: Client): Observable<any> {
     this.spinnerService.setIsLoading(true);
-    return this.delete<any>(this.CLIENT_URL + `/${client.id}`).pipe(
+    return this.delete<any>(this.CLIENT_URL + `/${client.id}.json`).pipe(
       tap(() => {
         this.spinnerService.setIsLoading(false);
         this.notificationService.warning(`Deleted client ${client.name}`);

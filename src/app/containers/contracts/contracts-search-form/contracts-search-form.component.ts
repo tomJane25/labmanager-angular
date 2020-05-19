@@ -24,7 +24,7 @@ export class ContractsSearchFormComponent implements OnInit {
   }
 
   onChange() {
-    this.searchParams.clientId = +this.form.value.clientId;
+    this.searchParams.clientId = this.form.value.clientId;
     this.searchParams.contractStatus = this.form.value.status;
     this.changeEmitter.emit(this.searchParams);
   }

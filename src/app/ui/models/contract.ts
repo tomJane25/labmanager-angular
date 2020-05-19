@@ -4,7 +4,7 @@ export type ContractStatusType = 'OPEN' | 'CLOSED' | 'CANCELED';
 
 export class Contract extends Entity {
   number: string;
-  clientId: number;
+  clientId: string;
   title: string;
   startDate: Date;
   finishDate: Date;
