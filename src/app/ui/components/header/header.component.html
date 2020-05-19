@@ -6,8 +6,8 @@
   </span>
   </a>
   <div class="user-actions" *ngIf="auth.isAuthenticated()">
+    <div class="email-header">{{auth.userEmail}}</div>
     <button class="btn-header" (click)="logout()">Logout</button>
   </div>
 </div>
 <mat-progress-bar *ngIf="isLoading"></mat-progress-bar>
-

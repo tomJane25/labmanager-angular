@@ -17,6 +17,7 @@ export interface User {
 }
 
 export interface AuthResponse {
+  email: string;
   idToken: string;
   expiresIn: string;
 }

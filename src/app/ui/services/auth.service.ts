@@ -6,6 +6,7 @@ import { Observable, Subject, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { AuthResponse, User } from '../models';
 import { SpinnerService } from './spinner.service';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
+    private notificationService: NotificationService
   ) {}
 
   get token(): string {
@@ -27,13 +29,20 @@ export class AuthService {
     return localStorage.getItem('fb-token');
   }
 
+  get userEmail(): string {
+    return localStorage.getItem('fb-email');
+  }
+
   login(user: User): Observable<AuthResponse>{
     user.returnSecureToken = true;
     this.spinnerService.setIsLoading(true);
-    return this.http.post<AuthResponse>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`, user)
+    return this.http.post<AuthResponse>(
+      `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`, user
+    )
       .pipe(
         tap((response) => {
           this.spinnerService.setIsLoading(false);
+          this.notificationService.success(`Welcome back, ${response.email}`);
           this.setToken(response);
         }),
         catchError( error => {
@@ -53,7 +62,7 @@ export class AuthService {
   }
 
   private handleError(error: HttpErrorResponse){
-    const {message} = error.error.error;
+    const message = error.error.error.message;
 
     switch (message) {
       case 'EMAIL_NOT_FOUND':
@@ -72,5 +81,6 @@ export class AuthService {
     const expiresDate = new Date(new Date().getTime() + +response.expiresIn * 1000);
     localStorage.setItem('fb-token', response.idToken);
     localStorage.setItem('fb-token-expires', expiresDate.toString());
+    localStorage.setItem('fb-email', response.email);
   }
 }
