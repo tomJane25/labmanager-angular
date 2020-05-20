@@ -21,16 +21,15 @@ export class AuthService {
   ) {}
 
   get token(): string {
-    const expiresDate = new Date(localStorage.getItem('fb-token-expires'));
-    if (new Date() > expiresDate) {
-      this.logout();
-      return null;
-    }
     return localStorage.getItem('fb-token');
   }
 
   get userEmail(): string {
     return localStorage.getItem('fb-email');
+  }
+
+  isAuthenticated(): boolean {
+    return !!this.token;
   }
 
   login(user: User): Observable<AuthResponse>{
@@ -53,17 +52,16 @@ export class AuthService {
       );
   }
 
-  logout(){
-    localStorage.clear();
-  }
-
-  isAuthenticated(): boolean {
-    return !!this.token;
+  private setToken(response: AuthResponse){
+    const expiresDate = new Date(new Date().getTime() + +response.expiresIn * 1000);
+    localStorage.setItem('fb-token', response.idToken);
+    localStorage.setItem('fb-token-expires', expiresDate.toString());
+    localStorage.setItem('fb-refresh-token', response.refreshToken);
+    localStorage.setItem('fb-email', response.email);
   }
 
   private handleError(error: HttpErrorResponse){
     const message = error.error.error.message;
-
     switch (message) {
       case 'EMAIL_NOT_FOUND':
         this.error$.next('Email not found');
@@ -77,10 +75,7 @@ export class AuthService {
     }
   }
 
-  private setToken(response: AuthResponse){
-    const expiresDate = new Date(new Date().getTime() + +response.expiresIn * 1000);
-    localStorage.setItem('fb-token', response.idToken);
-    localStorage.setItem('fb-token-expires', expiresDate.toString());
-    localStorage.setItem('fb-email', response.email);
+  logout(){
+    localStorage.clear();
   }
 }

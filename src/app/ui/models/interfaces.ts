@@ -20,4 +20,5 @@ export interface AuthResponse {
   email: string;
   idToken: string;
   expiresIn: string;
+  refreshToken: string;
 }

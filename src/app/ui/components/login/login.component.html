@@ -1,7 +1,12 @@
 <div class="form-wrapper">
-  <div class="alert" *ngIf="auth.error$ | async as error">
+  <div class="alert alert-info" *ngIf="message">
+    {{ message }}
+  </div>
+
+  <div class="alert alert-danger" *ngIf="auth.error$ | async as error">
     {{error}}
   </div>
+
   <form class="form-add" [formGroup]="form" (ngSubmit)="submit()">
     <label for="email">Email:</label>
     <input id="email" class="control" type="email" formControlName="email">

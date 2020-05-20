@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
@@ -29,6 +29,7 @@ import { ContractsSearchFormComponent } from './containers/contracts/contracts-s
 import { ContractsFilterPipe } from './ui/pipes';
 import { NotificationComponent } from './ui/components/notification/notification.component';
 import { LoginComponent } from './ui/components/login/login.component';
+import { AuthInterceptor } from './ui/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,13 @@ import { LoginComponent } from './ui/components/login/login.component';
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument(),
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
