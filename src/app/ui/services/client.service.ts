@@ -1,31 +1,84 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 
 import { Client } from '../models';
+import { HttpService } from './http.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ClientService {
+export class ClientService extends HttpService {
 
-  constructor(private http: HttpClient ) {
-  }
+  private readonly CLIENT_URL = environment.dbUrl + '/clients';
 
   getClients(): Observable<Client[]> {
-    return this.http.get<Client[]>('https://my-json-server.typicode.com/tomJane25/labmanager_JSON/clients');
+    this.spinnerService.setIsLoading(true);
+    return this.get<Client>(this.CLIENT_URL + '.json').pipe(
+      map(response => {
+        return Object.keys(response).map(key => ({
+          ...response[key],
+          id: key,
+        }));
+      }),
+      tap(() => this.spinnerService.setIsLoading(false)),
+      catchError (error => {
+        this.spinnerService.setIsLoading(false);
+        this.notificationService.error(`Clients not loaded. Http failure response. Status ${error.status}`);
+        return throwError(error);
+      })
+    );
   }
 
   addClient(client: Client): Observable<Client> {
-    return this.http.post<Client>('https://my-json-server.typicode.com/tomJane25/labmanager_JSON/clients', client);
+    this.spinnerService.setIsLoading(true);
+    return this.post<Client>(this.CLIENT_URL + '.json', client).pipe(
+      map(response => {
+        return {
+          ...client,
+          id: response.name
+        };
+      }),
+      tap(() => {
+        this.spinnerService.setIsLoading(false);
+        this.notificationService.success(`Added client ${client.name}`);
+      }),
+      catchError (error => {
+        this.spinnerService.setIsLoading(false);
+        this.notificationService.error(`Client ${client.name} not added. Http failure response. Status ${error.status}`);
+        return throwError(error);
+      })
+    );
   }
 
   updateClient(client: Client): Observable<Client> {
-    return this.http.put<Client>(`https://my-json-server.typicode.com/tomJane25/labmanager_JSON/clients/${client.id}`, client);
+    this.spinnerService.setIsLoading(true);
+    return this.put<Client>(this.CLIENT_URL + `/${client.id}.json`, client).pipe(
+      tap(() => {
+        this.spinnerService.setIsLoading(false);
+        this.notificationService.success(`Updated client ${client.name}`);
+      }),
+      catchError (error => {
+        this.spinnerService.setIsLoading(false);
+        this.notificationService.error(`Client ${client.name} not updated. Http failure response. Status ${error.status}`);
+        return throwError(error);
+      })
+    );
   }
 
-  deleteClient(clientId: number): Observable<any> {
-    return this.http.delete<any>(`https://my-json-server.typicode.com/tomJane25/labmanager_JSON/clients/${clientId}`);
+  deleteClient(client: Client): Observable<any> {
+    this.spinnerService.setIsLoading(true);
+    return this.delete<any>(this.CLIENT_URL + `/${client.id}.json`).pipe(
+      tap(() => {
+        this.spinnerService.setIsLoading(false);
+        this.notificationService.warning(`Deleted client ${client.name}`);
+      }),
+      catchError (error => {
+        this.spinnerService.setIsLoading(false);
+        this.notificationService.error(`Client ${client.name} not deleted. Http failure response. Status ${error.status}`);
+        return throwError(error);
+      })
+    );
   }
-
 }

@@ -1,0 +1,6 @@
+<button
+  class="active-button"
+  [class.activated]="isActive"
+  (click)="changeIsActive()"
+  [textContent]="isActive ? titleActive: titleInactive">
+</button>

@@ -1,0 +1,60 @@
+<div class="form-wrapper">
+  <p class="title">Add new contract</p>
+  <form class="form-add" [formGroup]="form" (ngSubmit)="submit()">
+    <div class="field">
+      <label for="number">Number</label>
+      <input id="number" class="control" type="text" formControlName="number">
+    </div>
+    <div class="validate" *ngIf="form.get('number').invalid && form.get('number').touched">
+      <small>Number cannot be empty</small>
+    </div>
+
+    <div class="field">
+      <label for="client">Client</label>
+      <select id="client" class="control" formControlName="clientId">
+        <ng-container *ngFor="let client of clients">
+          <option value="{{client.id}}">{{client.name}}</option>
+        </ng-container>
+      </select>
+    </div>
+    <div class="validate" *ngIf="form.get('clientId').invalid && form.get('clientId').touched">
+      <small>Client cannot be empty</small>
+    </div>
+
+    <div class="field">
+      <label for="title">Title</label>
+      <input id="title" class="control" type="text" formControlName="title">
+    </div>
+    <div class="validate" *ngIf="form.get('title').invalid && form.get('title').touched">
+      <small>Title cannot be empty</small>
+    </div>
+
+    <div class="field">
+      <label for="startDate">Start date</label>
+      <input id="startDate" class="control" type="date" formControlName="startDate">
+    </div>
+    <div class="validate" *ngIf="form.get('startDate').invalid && form.get('startDate').touched">
+      <small>Start date cannot be empty</small>
+    </div>
+
+    <div class="field">
+      <label for="finishDate">Finish date</label>
+      <input id="finishDate" class="control" type="date" formControlName="finishDate">
+    </div>
+    <div class="validate" *ngIf="form.get('finishDate').invalid && form.get('finishDate').touched">
+      <small>Finish date cannot be empty</small>
+    </div>
+
+    <div class="field">
+      <label for="amount">Amount</label>
+      <input id="amount" class="control" type="number" formControlName="amount">
+    </div>
+    <div class="validate" *ngIf="form.get('amount').invalid && form.get('amount').touched">
+      <small>Amount cannot be empty</small>
+    </div>
+
+    <div class="action-buttons">
+      <button class="btn-form" type="submit" [disabled]="form.invalid">Add</button>
+    </div>
+  </form>
+</div>

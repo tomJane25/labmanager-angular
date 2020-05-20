@@ -1,0 +1,27 @@
+<ng-container *ngIf="clients$ && contracts$ | async">
+  <p class="table-title">Contracts</p>
+
+  <div class="contracts-actions">
+    <app-contracts-search-form
+      [clients]="clients$ | async"
+      (changeEmitter)="filterContracts($event)"
+    ></app-contracts-search-form>
+
+    <app-active-button
+      [titleInactive]="'Add contract'"
+      [titleActive]="'Cancel'"
+      (isActiveEmitter)="setIsAddingContract($event)"
+    ></app-active-button>
+  </div>
+
+  <app-contracts-add-form *ngIf="isAddingContract"
+    [clients]="clients$ | async"
+    (submitEmitter)="addContract($event)"
+  ></app-contracts-add-form>
+  <app-contracts-table
+    [contracts]="contracts$ | async | contractsFilter: searchParams"
+    [clients]="clients$ | async"
+    (deleteEmitter)="deleteContract($event)"
+    (updateEmitter)="updateContract($event)"
+  ></app-contracts-table>
+</ng-container>

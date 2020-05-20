@@ -44,12 +44,12 @@ export class UpdateClientSuccessAction implements Action {
 
 export class DeleteClientAction implements Action {
   public readonly type = ActionTypes.DELETE_CLIENT;
-  constructor(public payload: {itemId: number}) {}
+  constructor(public payload: {item: Client}) {}
 }
 
 export class DeleteClientSuccessAction implements Action {
   public readonly type = ActionTypes.DELETE_CLIENT_SUCCESS;
-  constructor(public payload: {itemId: number}) {}
+  constructor(public payload: {item: Client}) {}
 }
 
 export class FailureClientHttpResponseAction implements Action {

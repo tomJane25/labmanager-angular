@@ -1,0 +1,24 @@
+<div class="notification-wrap">
+  <ng-container *ngFor="let error of errors; let i=index">
+    <div class="notification notification-error">
+      <p>{{error.text}}</p>
+      <button
+        class="btn btn-close"
+        (click)="closeError(i)">
+        <fa-icon [icon]="fontAwesome.faTimes"></fa-icon>
+      </button>
+    </div>
+  </ng-container>
+
+  <ng-container *ngFor="let notification of notifications">
+    <div
+      class="notification"
+      [ngClass]="{
+      'notification-success': notification.type === 'success',
+      'notification-warning': notification.type === 'warning'
+    }"
+    >
+      <p>{{notification.text}}</p>
+    </div>
+  </ng-container>
+</div>

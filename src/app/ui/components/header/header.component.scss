@@ -17,4 +17,36 @@
     text-decoration: none;
     color: #CFD8DC;
   }
+  .user-actions {
+    display: flex;
+    align-items: center
+  }
+}
+
+.btn-header {
+  font-size: 1.3em;
+  margin-left: 1em;
+  border: 2px solid white;
+  border-radius: 7px;
+  padding: 5px;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0 0 3px 3px white;
+  }
+}
+
+.email-header {
+  height: 20px;
+  padding: 4px 10px;
+  border-radius: 14px;
+  color: white;
+  box-shadow: 0 0 4px 1px white;
+}
+
+.mat-progress-bar {
+  position: absolute;
+  top: 70px;
+  left: 0;
 }

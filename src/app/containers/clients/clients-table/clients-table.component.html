@@ -1,0 +1,56 @@
+<table class="table-items">
+  <colgroup>
+    <col class="col_1">
+    <col class="col_2">
+    <col class="col_3">
+    <col class="col_4">
+  </colgroup>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Email</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let client of clients">
+
+    <ng-container *ngIf="editingClient.id !== client.id">
+      <td>{{client.name}}</td>
+      <td>{{client.address}}</td>
+      <td><a href="mailto:{{client.email}}">{{client.email}}</a></td>
+      <td>
+        <div class="action-buttons">
+          <button class="btn-table btn-table-attention" (click)="edit(client)">
+            <fa-icon [icon]="fontAwesome.faPencilAlt"></fa-icon>
+            <span> Edit</span>
+          </button>
+          <button class="btn-table btn-table-danger" (click)="delete(client)">
+            <fa-icon [icon]="fontAwesome.faTimes"></fa-icon>
+            <span> Delete</span>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container *ngIf="editingClient.id === client.id">
+      <td><input [(ngModel)]="editingClient.name" required value="{{editingClient.name}}" #name=ngModel></td>
+      <td><input [(ngModel)]="editingClient.address" required value="{{editingClient.address}}" #address=ngModel></td>
+      <td><input [(ngModel)]="editingClient.email" required email value="{{editingClient.email}}" #email=ngModel></td>
+      <td>
+        <div class="action-buttons">
+          <button
+            class="btn-table btn-table-confirm"
+            [disabled]="email.invalid || name.invalid || address.invalid"
+            (click)="update(editingClient)">
+            Save
+          </button>
+          <button class="btn-table btn-table-attention" (click)="cancel()">Cancel</button>
+        </div>
+      </td>
+    </ng-container>
+
+  </tr>
+  </tbody>
+</table>

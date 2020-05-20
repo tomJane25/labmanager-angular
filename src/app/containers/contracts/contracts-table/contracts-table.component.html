@@ -1,0 +1,69 @@
+<table class="table-items">
+  <thead>
+  <tr>
+    <th>Number</th>
+    <th>Client</th>
+    <th>Title</th>
+    <th>Start date</th>
+    <th>Finish date</th>
+    <th>Amount</th>
+    <th>Balance</th>
+    <th>Status</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngIf="contracts.length === 0">
+    <td colspan="9">No contracts found...</td>
+  </tr>
+
+  <tr
+    *ngFor="let contract of contracts"
+    [ngClass]="contract.status | lowercase"
+  >
+    <td>{{contract.number}}</td>
+    <td>{{getClientNameById(contract.clientId)}}</td>
+    <td>{{contract.title}}</td>
+    <td class="nowrap">{{contract.startDate}}</td>
+    <td class="nowrap">{{contract.finishDate}}</td>
+    <td>{{contract.amount | currency}}</td>
+    <td>{{contract.balance | currency}}</td>
+
+    <ng-container *ngIf="editingContract.id !== contract.id">
+      <td>{{contract.status}}</td>
+      <td>
+        <div class="action-buttons">
+          <button class="btn-table btn-table-attention" (click)="edit(contract)">
+            <fa-icon [icon]="fontAwesome.faPencilAlt"></fa-icon>
+            <span> Edit</span>
+          </button>
+          <button class="btn-table btn-table-danger" (click)="delete(contract)">
+            <fa-icon [icon]="fontAwesome.faTimes"></fa-icon>
+            <span> Delete</span>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container *ngIf="editingContract.id === contract.id">
+      <td>
+        <select [(ngModel)]="editingContract.status" #status=ngModel>
+          <option>OPEN</option>
+          <option>CLOSED</option>
+          <option>CANCELED</option>
+        </select>
+      </td>
+      <td>
+        <div class="action-buttons">
+          <button
+            class="btn-table btn-table-confirm"
+            (click)="update(editingContract)">
+            Save
+          </button>
+          <button class="btn-table btn-table-attention" (click)="cancel()">Cancel</button>
+        </div>
+      </td>
+    </ng-container>
+  </tr>
+  </tbody>
+</table>

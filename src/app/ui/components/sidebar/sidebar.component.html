@@ -1,9 +1,9 @@
-<div class="sidebar">
+<div class="sidebar" *ngIf="auth.isAuthenticated()">
   <a routerLink="/clients" class="routerLink">
     <fa-icon [icon]="fontAwesome.faUsers"></fa-icon>
     Clients
   </a>
-  <a routerLink="/clients" class="routerLink">
+  <a routerLink="/contracts" class="routerLink">
     <fa-icon [icon]="fontAwesome.faHandshake"></fa-icon>
     Contracts
   </a>
