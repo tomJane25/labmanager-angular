@@ -33,7 +33,6 @@
         </div>
       </td>
     </ng-container>
-
     <ng-container *ngIf="editingClient.id === client.id">
       <td><input [(ngModel)]="editingClient.name" required value="{{editingClient.name}}" #name=ngModel></td>
       <td><input [(ngModel)]="editingClient.address" required value="{{editingClient.address}}" #address=ngModel></td>

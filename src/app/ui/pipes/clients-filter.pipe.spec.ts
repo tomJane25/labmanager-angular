@@ -3,13 +3,13 @@ import { Client } from '../models';
 
 const testClients: Client[] = [
   {
-    id: 1,
+    id: '1',
     name: 'test name 1',
     address: 'address',
     email: 'test@email.com'
   },
   {
-    id: 2,
+    id: '2',
     name: 'test name 2',
     address: 'address',
     email: 'test@email.com'

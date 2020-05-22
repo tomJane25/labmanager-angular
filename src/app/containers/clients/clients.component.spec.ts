@@ -10,7 +10,7 @@ import { Client } from '../../ui/models';
 import { ActionTypes } from '../../store/client-store/actions';
 
 const testClient: Client = {
-  id: 1,
+  id: '1',
   name: 'name',
   address: 'address',
   email: 'test@mail.com'
